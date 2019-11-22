@@ -1,11 +1,11 @@
 import React from "react";
-import logo from "./logo.svg";
+import Form_Component from "./components/Form_Component";
 import "./App.css";
 
 function App() {
   return (
     <React.Fragment>
-      <Form />
+      <Form_Component />
     </React.Fragment>
   );
 }
