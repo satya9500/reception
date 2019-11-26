@@ -3,6 +3,10 @@ const User = require("../models/user.js");
 const router = express.Router();
 const request = require("request");
 
+router.get("/", async (req, res, next) => {
+  res.render("checkin.ejs");
+});
+
 router.post("/users", async (req, res, next) => {
   try {
     const user = new User(req.body);
@@ -11,6 +15,11 @@ router.post("/users", async (req, res, next) => {
   } catch (error) {
     res.send(error);
   }
+  next();
+});
+
+router.get("/users", async (req, res, next) => {
+  res.render("checkedin.ejs");
   next();
 });
 
