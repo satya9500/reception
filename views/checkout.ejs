@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    <title>Checkout</title>
+  </head>
+
+  <body>
+    <form class="form form-group" id="myform">
+      <label>Enter email of the registered User</label>
+      <input type="text" class="form-control" name="email" />
+      <button type="submit" class="btn btn-primary form-control">
+        Check out
+      </button>
+    </form>
+
+    <script>
+      $("#myform").submit(function(e) {
+        e.preventDefault();
+        var data = new FormData(document.getElementById("myform"));
+
+        let jsonObject = {};
+
+        for (const [key, value] of data.entries()) {
+          jsonObject[key] = value;
+        }
+        jsonObject2 = JSON.stringify(jsonObject);
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "http://localhost:3001/checkout");
+        xhr.setRequestHeader("Content-type", "application/json; charset=utf-8");
+        xhr.send(jsonObject2);
+        console.log(jsonObject2);
+        window.location.href = "/checkedout";
+      });
+    </script>
+  </body>
+</html>

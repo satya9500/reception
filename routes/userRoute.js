@@ -5,16 +5,34 @@ const request = require("request");
 
 router.get("/", async (req, res, next) => {
   res.render("checkin.ejs");
+  next();
+});
+
+router.get("/checkedin", async (req, res, next) => {
+  res.render("checkedin.ejs");
+  next();
+});
+
+router.get("/checkout", async (req, res, next) => {
+  res.render("checkout.ejs");
+  next();
+});
+
+router.get("/checkedout", async (req, res, next) => {
+  res.render("checkedout.ejs");
+  next();
 });
 
 router.post("/users", async (req, res, next) => {
-  try {
-    const user = new User(req.body);
-    await user.save();
-    res.send(user);
-  } catch (error) {
-    res.send(error);
-  }
+  // try {
+  console.log("line 13");
+  console.log(req.body);
+  const user = new User(req.body);
+  await user.save();
+  res.send(req.body);
+  // } catch (error) {
+  //   res.send(error);
+  // }
   next();
 });
 

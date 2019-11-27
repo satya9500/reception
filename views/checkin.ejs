@@ -73,22 +73,30 @@
         <button
           type="submit"
           class="btn btn-primary form-control"
-          onclick="sendt()"
+          id="submit-btn"
         >
           CheckIn
         </button>
       </form>
     </div>
     <script>
-      document.addEventListener("submit", sendt);
-      function sendt(e) {
+      $("#myform").submit(function(e) {
         e.preventDefault();
-        var myform = document.getElementById("myform");
-        console.log(myform);
-        // let xhr = new XMLHttpRequest();
-        // xhr.open('POST',"http://localhost:3001/users");
-        // xhr.send();
-      }
+        var data = new FormData(document.getElementById("myform"));
+
+        let jsonObject = {};
+
+        for (const [key, value] of data.entries()) {
+          jsonObject[key] = value;
+        }
+        jsonObject2 = JSON.stringify(jsonObject);
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "http://localhost:3001/users");
+        xhr.setRequestHeader("Content-type", "application/json; charset=utf-8");
+        xhr.send(jsonObject2);
+        console.log(jsonObject2);
+        window.location.href = "/checkedin";
+      });
     </script>
   </body>
 </html>
